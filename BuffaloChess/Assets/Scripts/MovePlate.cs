@@ -24,6 +24,13 @@ public class MovePlate : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f);
         }
     }
+    //테스트용 만약 클릭했을 시 승패와 보상 저장
+    public void BtnClick()
+    {
+        GameObject.Find("GameManager").GetComponent<Rating>().LoadFile();
+        GameObject.Find("GameManager").GetComponent<Rating>().wlList.Add(new WLRecord("랭크", "보상")); ;
+        GameObject.Find("GameManager").GetComponent<Rating>().SaveFile();
+    }
 
     public void OnMouseUp()
     {
@@ -36,10 +43,17 @@ public class MovePlate : MonoBehaviour
             if (cp.name == "white_king")
             {
                 controller.GetComponent<Game>().Winner("black");
+                //블랙 승 저장
+                //화이트 패 저장
             }
             if (cp.name == "black_king")
             {
                 controller.GetComponent<Game>().Winner("white");
+                //화이트 승 저장
+                //GameObject.Find("GameManager").GetComponent<Rating>().LoadFile();
+                //GameObject.Find("GameManager").GetComponent<Rating>().wlList.Add(new WLRecord("랭크", "보상")); ;
+                //GameObject.Find("GameManager").GetComponent<Rating>().SaveFile();
+                //블랙 패 저장
             }
 
             Destroy(cp);

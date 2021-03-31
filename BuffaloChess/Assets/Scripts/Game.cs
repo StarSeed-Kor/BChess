@@ -125,9 +125,9 @@ public class Game : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().enabled = true;
         GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().text = playerWinner + " is the Winner";
-
         GameObject.FindGameObjectWithTag("RestartText").GetComponent<Text>().enabled = true;
 
+        
     }
 
     // Update is called once per frame
