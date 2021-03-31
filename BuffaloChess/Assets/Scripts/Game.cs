@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
     public GameObject chesspiece;
 
-    private GameObject[,] positions = new GameObject[11, 6];
-    //private GameObject[,] positions = new GameObject[8, 8];
+    //private GameObject[,] positions = new GameObject[11, 6];
+    private GameObject[,] positions = new GameObject[8, 8];
     private GameObject[] playerBlack = new GameObject[16];
     private GameObject[] playerWhite = new GameObject[16];
 
@@ -22,7 +24,7 @@ public class Game : MonoBehaviour
         playerWhite = new GameObject[]
         {
             //버팔로체스
-            //Create("hunter", 5, 0), Create("dog", 3, 0), Create("dog", 4, 0), Create("dog", 6, 0), Create("dog", 7, 0)
+            /*Create("hunter", 5, 0), Create("dog", 3, 0), Create("dog", 4, 0), Create("dog", 6, 0), Create("dog", 7, 0)*/
 
             //일반 체스
             Create("white_rook", 0, 0), Create("white_knight", 1, 0), Create("white_bishop", 2, 0),
@@ -95,9 +97,47 @@ public class Game : MonoBehaviour
         return true;
     }
 
+    public string GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameOver;
+    }
+
+    public void NextTurn()
+    {
+        if (currentPlayer == "white")
+        {
+            currentPlayer = "black";
+        }
+        else
+        {
+            currentPlayer = "white";
+        }
+    }
+
+    public void Winner(string playerWinner)
+    {
+        gameOver = true;
+
+        GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().enabled = true;
+        GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().text = playerWinner + " is the Winner";
+
+        GameObject.FindGameObjectWithTag("RestartText").GetComponent<Text>().enabled = true;
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameOver == true && Input.GetMouseButtonDown(0))
+        {
+            gameOver = false;
+
+            SceneManager.LoadScene("Game");
+        }
     }
 }
