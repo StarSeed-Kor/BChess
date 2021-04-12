@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.WSA;
 
 public class ChessManager : MonoBehaviour
 {
@@ -60,8 +61,8 @@ public class ChessManager : MonoBehaviour
         x *= 1.1f;
         y *= 1.1f;
 
-        //x += -5.35f; y += -2.7f;
-        x += -3.85f; y += -4.15f;
+        x += -5.35f; y += -3.8f;
+        //x += -3.85f; y += -4.15f;
 
         this.transform.position = new Vector3(x, y, -1.0f);
     }
@@ -113,7 +114,7 @@ public class ChessManager : MonoBehaviour
         {
             //버팔로 체스
             case "hunter":
-                SurroundMovePlate();
+                HunterMovePlate();
                 break;
             case "dog":
                 DogMovePlate(1, 0);
@@ -173,6 +174,41 @@ public class ChessManager : MonoBehaviour
     }
 
     //버팔로 체스
+    public void HunterMovePlate()//헌터
+    {
+        HunterPointMovePlate(BoardX, BoardY + 1);
+        HunterPointMovePlate(BoardX, BoardY - 1);
+        HunterPointMovePlate(BoardX - 1, BoardY - 1);
+        HunterPointMovePlate(BoardX - 1, BoardY - 0);
+        HunterPointMovePlate(BoardX - 1, BoardY + 1);
+        HunterPointMovePlate(BoardX + 1, BoardY - 1);
+        HunterPointMovePlate(BoardX + 1, BoardY - 0);
+        HunterPointMovePlate(BoardX + 1, BoardY + 1);
+    }
+
+    public void HunterPointMovePlate(int x, int y)
+    {
+        Game sc = controller.GetComponent<Game>();
+
+        if (sc.PositionOnBoard(x, y))
+        {
+            GameObject cp = sc.GetPosition(x, y);
+
+            if (cp == null)
+            {
+                //물소만 갈 수 있는 Y[0]는 갈 수 없음
+                if (y >= 1)
+                {
+                    MovePlateSpawn(x, y);
+                }
+            }
+            else if (cp.GetComponent<ChessManager>().player != player && y >= 1)
+            {
+                MovePlateAttackSpawn(x, y);
+            }
+        }
+    }
+
     public void DogMovePlate(int xIncreament, int yIncrement)
     {
         Game sc = controller.GetComponent<Game>();
@@ -180,7 +216,7 @@ public class ChessManager : MonoBehaviour
         int x = BoardX + xIncreament;
         int y = BoardY + yIncrement;
 
-        while (sc.PositionOnBoard(x, y) && sc.GetPosition(x, y) == null)
+        while (sc.PositionOnBoard(x, y) && sc.GetPosition(x, y) == null && y >= 1)
         {
             MovePlateSpawn(x, y);
             x += xIncreament;
@@ -194,6 +230,12 @@ public class ChessManager : MonoBehaviour
 
         if (sc.PositionOnBoard(x, y))
         {
+            //보드 가장 아래까지 도달하면
+            if (y == 0)
+            {
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>().Winner("Buffalo");
+            }
+
             if (sc.GetPosition(x, y) == null)
             {
                 MovePlateSpawn(x, y);
@@ -298,8 +340,8 @@ public class ChessManager : MonoBehaviour
         x *= 1.1f;
         y *= 1.1f;
 
-        //x += -5.35f; y += -2.7f;
-        x += -3.85f; y += -4.15f;
+        x += -5.35f; y += -3.8f;
+        //x += -3.85f; y += -4.15f;
 
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
 
@@ -316,8 +358,8 @@ public class ChessManager : MonoBehaviour
         x *= 1.1f;
         y *= 1.1f;
 
-        //x += -5.35f; y += -2.7f;
-        x += -3.85f; y += -4.15f;
+        x += -5.35f; y += -3.8f;
+        //x += -3.85f; y += -4.15f;
 
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
 

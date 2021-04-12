@@ -56,6 +56,16 @@ public class MovePlate : MonoBehaviour
                 //블랙 패 저장
             }
 
+            if (cp.name == "buffalo")
+            {
+                Game.BuffaloCnt -= 1;
+                Debug.Log(Game.BuffaloCnt);
+                if(Game.BuffaloCnt == 0)
+                {
+                    controller.GetComponent<Game>().Winner("Hunter");
+                }
+            }
+                
             Destroy(cp);
         }
 
