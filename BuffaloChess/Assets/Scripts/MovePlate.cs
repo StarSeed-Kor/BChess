@@ -28,8 +28,32 @@ public class MovePlate : MonoBehaviour
     public void BtnClick()
     {
         GameObject.Find("GameManager").GetComponent<Rating>().LoadFile();
-        GameObject.Find("GameManager").GetComponent<Rating>().wlList.Add(new WLRecord("랭크", "보상")); ;
-        GameObject.Find("GameManager").GetComponent<Rating>().SaveFile();
+        if (GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star1 &&
+            !GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star2 &&
+            !GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star3)
+        {
+            GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star2 = true;
+            GameObject.Find("GameManager").GetComponent<Rating>().SaveFile();
+        }
+
+        else if (GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star1 &&
+             GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star2 &&
+             !GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star3)
+        {
+            GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star3 = true;
+            GameObject.Find("GameManager").GetComponent<Rating>().SaveFile();
+        }
+
+        else if (GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star1 &&
+             GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star2 &&
+              GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star3)
+        {
+            GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Rank += 1;
+            GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star1 = true;
+            GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star2 = false;
+            GameObject.Find("GameManager").GetComponent<Rating>().wlList[0].Star3 = false;
+            GameObject.Find("GameManager").GetComponent<Rating>().SaveFile();
+        }
     }
 
     public void OnMouseUp()

@@ -14,14 +14,18 @@ public class Serialization<T>
 [System.Serializable]
 public class WLRecord
 {
-    public string Rank;
-    public string Rewards;
-
+    public int Rank;
+    public bool Star1;
+    public bool Star2;
+    public bool Star3;
+    
     //승패 기록 리스트
-    public WLRecord(string rank, string rewards)
+    public WLRecord(int rank, bool star1, bool star2, bool star3)
     {
         Rank = rank;
-        Rewards = rewards;
+        Star1 = star1;
+        Star2 = star2;
+        Star3 = star3;
     }
 }
 
@@ -33,6 +37,7 @@ public class Rating : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        wlList.Add(new WLRecord(0, true, false, false));
         filePath = Application.persistentDataPath + "/Ranking.txt";
         print(filePath);
         LoadFile();
@@ -73,7 +78,26 @@ public class Rating : MonoBehaviour
 
     public void BtnClick()
     {
-        wlList.Add(new WLRecord("랭크", "보상"));
-        SaveFile();
+        if(wlList[0].Star1 && !wlList[0].Star2 && !wlList[0].Star3)
+        {
+            wlList[0].Star2 = true;
+            SaveFile();
+        }
+
+        else if (wlList[0].Star1 && wlList[0].Star2 && !wlList[0].Star3)
+        {
+            Debug.Log("ddd");
+            wlList[0].Star3 = true;
+            SaveFile();
+        }
+
+        else if (wlList[0].Star1 && wlList[0].Star2 && wlList[0].Star3)
+        {
+            wlList[0].Rank += 1;
+            wlList[0].Star1 = true;
+            wlList[0].Star2 = false;
+            wlList[0].Star3 = false;
+            SaveFile();
+        }
     }
 }
