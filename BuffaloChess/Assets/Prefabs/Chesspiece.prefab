@@ -110,9 +110,9 @@ MonoBehaviour:
   white_king: {fileID: 21300000, guid: b5212bfdd2940af439c601c28db7791d, type: 3}
   white_rook: {fileID: 21300000, guid: a061d912fa7174141b397ebf9088f94e, type: 3}
   white_pawn: {fileID: 21300000, guid: edb72875352f81d4783a79eff665071c, type: 3}
-  hunter: {fileID: 21300000, guid: 2a3129f95277c354e98aa29f1475bf22, type: 3}
-  dog: {fileID: 21300000, guid: a6b2f8a3242e3d34f82196f0f5067858, type: 3}
-  buffalo: {fileID: 21300000, guid: 43c71e845c464aa45ab601307a339ef3, type: 3}
+  hunter: {fileID: 21300000, guid: ffc5a30d18e5e7f439ca2d35f435cd68, type: 3}
+  dog: {fileID: 21300000, guid: 0bb15e4154b868949ab8732ff2eac079, type: 3}
+  buffalo: {fileID: 21300000, guid: f5b318b477ce7c5409f817d83e0e505d, type: 3}
 --- !u!61 &4178702641219483574
 BoxCollider2D:
   m_ObjectHideFlags: 0

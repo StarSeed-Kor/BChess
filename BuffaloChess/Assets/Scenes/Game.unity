@@ -474,6 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chesspiece: {fileID: 188447497656612861, guid: 08216f3b6a7b6504595447626f2d1602,
     type: 3}
+  TurnCnt: 0
 --- !u!1 &833539981
 GameObject:
   m_ObjectHideFlags: 0

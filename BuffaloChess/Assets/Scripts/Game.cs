@@ -13,22 +13,31 @@ public class Game : MonoBehaviour
     private GameObject[] playerBlack = new GameObject[16];
     private GameObject[] playerWhite = new GameObject[16];
 
-    private string currentPlayer = "white";
+    private string currentPlayer = "black";
 
     private bool gameOver = false;
 
     //남은 물소 마릿수
     static public int BuffaloCnt;
 
+    //현재 턴수
+    public int TurnCnt;
+
+    //자칼 이벤트의 턴수와 동작여부
+    int JackalTurn;
+    bool Jackal_Bool = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        //시작 랜덤값
-        if (Random.Range(0,2) == 0) currentPlayer = "white";
-        else currentPlayer = "black";
+        //시작하면 1턴
+        TurnCnt = 1;
 
         //기본 11마리
         BuffaloCnt = 11;
+
+        //자칼 이벤트의 턴수
+        JackalTurn = Random.Range(4, 10);
 
         //Instantiate(chesspiece, new Vector3(0, 0, -1), Quaternion.identity);
         playerWhite = new GameObject[]
@@ -127,6 +136,7 @@ public class Game : MonoBehaviour
     {
         if (currentPlayer == "white")
         {
+            TurnCnt += 1;
             currentPlayer = "black";
         }
         else
@@ -154,6 +164,23 @@ public class Game : MonoBehaviour
             gameOver = false;
 
             SceneManager.LoadScene("Game");
+        }
+    }
+
+    void Jackal_Event()
+    {
+        //자칼 이벤트가 발생하기 2턴 전에
+        if ((JackalTurn - 2) == TurnCnt)
+        {
+            //자칼 이벤트가 발생할 라인에 표시
+            Debug.Log("Before Event");
+        }
+
+        //자칼 이벤트가 발생할 턴이 되면
+        if (JackalTurn == TurnCnt)
+        {
+            //표시됬던 라인에 이벤트 발생
+            Debug.Log("Event Worked");
         }
     }
 }
