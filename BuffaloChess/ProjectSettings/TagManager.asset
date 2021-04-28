@@ -7,6 +7,9 @@ TagManager:
   - MovePlate
   - WinnerText
   - RestartText
+  - Buffalo
+  - Hunter
+  - Dog
   layers:
   - Default
   - TransparentFX

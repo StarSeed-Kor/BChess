@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
+    GameObject controller;
+
     public GameObject chesspiece;
 
     private GameObject[,] positions = new GameObject[11, 7];
@@ -21,11 +23,13 @@ public class Game : MonoBehaviour
     static public int BuffaloCnt;
 
     //현재 턴수
-    public int TurnCnt;
+    static public int TurnCnt;
 
     //자칼 이벤트의 턴수와 동작여부
-    int JackalTurn;
+    int Jackal_Turn;
     bool Jackal_Bool = false;
+    int Jackal_Line;
+    public GameObject Jackal_Zone;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,10 @@ public class Game : MonoBehaviour
         BuffaloCnt = 11;
 
         //자칼 이벤트의 턴수
-        JackalTurn = Random.Range(4, 10);
+        Jackal_Turn = Random.Range(4, 10);//4~9턴 사이
+        Jackal_Bool = false;
+        Jackal_Line = Random.Range(1, 5);//어느 라인에 생길지
+        Jackal_Zone.SetActive(false);
 
         //Instantiate(chesspiece, new Vector3(0, 0, -1), Quaternion.identity);
         playerWhite = new GameObject[]
@@ -137,6 +144,7 @@ public class Game : MonoBehaviour
         if (currentPlayer == "white")
         {
             TurnCnt += 1;
+            Jackal_Event();
             currentPlayer = "black";
         }
         else
@@ -169,18 +177,90 @@ public class Game : MonoBehaviour
 
     void Jackal_Event()
     {
+        controller = GameObject.FindGameObjectWithTag("GameController");
+        Game sc = controller.GetComponent<Game>();
+
         //자칼 이벤트가 발생하기 2턴 전에
-        if ((JackalTurn - 2) == TurnCnt)
+        if ((Jackal_Turn - 2) == TurnCnt && Jackal_Bool == false)
         {
             //자칼 이벤트가 발생할 라인에 표시
             Debug.Log("Before Event");
+            Jackal_Bool = true;
+
+            Jackal_Zone.SetActive(true);
+            Jackal_Zone.transform.position = new Vector3(0.15f, -2.72f + (1.1f * Jackal_Line), 0);
         }
 
         //자칼 이벤트가 발생할 턴이 되면
-        if (JackalTurn == TurnCnt)
+        if (Jackal_Turn == TurnCnt)
         {
             //표시됬던 라인에 이벤트 발생
             Debug.Log("Event Worked");
+            Jackal_Zone.SetActive(false);
+
+            GameObject[] Mals = GameObject.FindGameObjectsWithTag("Buffalo");
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Buffalo").Length; i++)
+            {
+                if(Mals[i].GetComponent<ChessManager>().GetYBoard() == (Jackal_Line + 1))
+                {
+                    Mals[i].GetComponent<ChessManager>().SetYBoard(6);
+                    Mals[i].GetComponent<ChessManager>().SetCoord();
+                }
+            }
+
+            Mals = GameObject.FindGameObjectsWithTag("Dog");
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Dog").Length; i++)
+            {
+                if (Mals[i].GetComponent<ChessManager>().GetYBoard() == (Jackal_Line + 1))
+                {
+                    Mals[i].GetComponent<ChessManager>().SetYBoard(1);
+
+                    GameObject cp = sc.GetPosition(Mals[i].GetComponent<ChessManager>().GetXBoard(), Mals[i].GetComponent<ChessManager>().GetYBoard());
+                    while (cp != null && Mals[i].GetComponent<ChessManager>().GetXBoard() < 10)
+                    {
+                        //만약 자리에 뭔가가 있으면 우측으로
+                        Mals[i].GetComponent<ChessManager>().SetXBoard(Mals[i].GetComponent<ChessManager>().GetXBoard() + 1);
+                        cp = sc.GetPosition(Mals[i].GetComponent<ChessManager>().GetXBoard(), Mals[i].GetComponent<ChessManager>().GetYBoard());
+                    }
+                    if (Mals[i].GetComponent<ChessManager>().GetXBoard() == 10)//우측 끝이면 좌로
+                    {
+                        while (cp != null && Mals[i].GetComponent<ChessManager>().GetXBoard() > 0)
+                        {
+                            //만약 자리에 뭔가가 있으면 우측으로
+                            Mals[i].GetComponent<ChessManager>().SetXBoard(Mals[i].GetComponent<ChessManager>().GetXBoard() - 1);
+                            cp = sc.GetPosition(Mals[i].GetComponent<ChessManager>().GetXBoard(), Mals[i].GetComponent<ChessManager>().GetYBoard());
+                        }
+                    }
+
+                    Mals[i].GetComponent<ChessManager>().SetCoord();
+                }
+            }
+
+            GameObject Mal = GameObject.FindWithTag("Hunter");
+            if (Mal.GetComponent<ChessManager>().GetYBoard() == (Jackal_Line + 1))
+            {
+                Mal.GetComponent<ChessManager>().SetYBoard(1);
+
+                GameObject cp = sc.GetPosition(Mal.GetComponent<ChessManager>().GetXBoard(), Mal.GetComponent<ChessManager>().GetYBoard());
+                while (cp != null && Mal.GetComponent<ChessManager>().GetXBoard() < 10)
+                {
+                    //만약 자리에 뭔가가 있으면 우측으로
+                    Mal.GetComponent<ChessManager>().SetXBoard(Mal.GetComponent<ChessManager>().GetXBoard() + 1);
+                    cp = sc.GetPosition(Mal.GetComponent<ChessManager>().GetXBoard(), Mal.GetComponent<ChessManager>().GetYBoard());
+                }
+                if (Mal.GetComponent<ChessManager>().GetXBoard() == 10)//우측 끝이면 좌로
+                {
+                    while (cp != null && Mal.GetComponent<ChessManager>().GetXBoard() > 0)
+                    {
+                        //만약 자리에 뭔가가 있으면 우측으로
+                        Mal.GetComponent<ChessManager>().SetXBoard(Mal.GetComponent<ChessManager>().GetXBoard() - 1);
+                        cp = sc.GetPosition(Mal.GetComponent<ChessManager>().GetXBoard(), Mal.GetComponent<ChessManager>().GetYBoard());
+                    }
+                }
+                Mal.GetComponent<ChessManager>().SetCoord();
+            }
+
+            Jackal_Bool = true;
         }
     }
 }

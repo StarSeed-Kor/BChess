@@ -31,10 +31,10 @@ public class ChessManager : MonoBehaviour
         switch(this.name)
         {
             //버팔로체스
-            case "hunter": this.GetComponent<SpriteRenderer>().sprite = hunter; player = "white"; break;
-            case "dog": this.GetComponent<SpriteRenderer>().sprite = dog; player = "white"; break;
+            case "hunter": this.GetComponent<SpriteRenderer>().sprite = hunter; player = "white"; tag = "Hunter"; break;
+            case "dog": this.GetComponent<SpriteRenderer>().sprite = dog; player = "white"; tag = "Dog"; break;
 
-            case "buffalo": this.GetComponent<SpriteRenderer>().sprite = buffalo; player = "black"; break;
+            case "buffalo": this.GetComponent<SpriteRenderer>().sprite = buffalo; player = "black"; tag = "Buffalo"; break;
 
             //일반 체스
             case "black_queen": this.GetComponent<SpriteRenderer>().sprite = black_queen; player = "black"; break;
@@ -202,7 +202,7 @@ public class ChessManager : MonoBehaviour
                     MovePlateSpawn(x, y);
                 }
             }
-            else if (cp.GetComponent<ChessManager>().player != player && y >= 1)
+            else if (cp.GetComponent<ChessManager>().player != player && y >= 1 && y <= 5)
             {
                 MovePlateAttackSpawn(x, y);
             }
@@ -216,7 +216,7 @@ public class ChessManager : MonoBehaviour
         int x = BoardX + xIncreament;
         int y = BoardY + yIncrement;
 
-        while (sc.PositionOnBoard(x, y) && sc.GetPosition(x, y) == null && y >= 1)
+        while (sc.PositionOnBoard(x, y) && sc.GetPosition(x, y) == null && y >= 1 && y <= 5)
         {
             MovePlateSpawn(x, y);
             x += xIncreament;
