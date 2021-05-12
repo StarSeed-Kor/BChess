@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    float Game_Timer;
-    float Max_Time = 3f;
+    public float Game_Timer;
+    public float Max_Time = 3f;
 
     public GameObject controller;
     GameObject reference = null;
@@ -27,18 +27,13 @@ public class Timer : MonoBehaviour
 
             controller = GameObject.FindGameObjectWithTag("GameController");
 
-            /*controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<ChessManager>().GetXBoard(),
-            reference.GetComponent<ChessManager>().GetYBoard());*/
+            GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+            for (int i = 0; i < movePlates.Length; i++)
+            {
+                Destroy(movePlates[i]);
+            }
 
-            /*reference.GetComponent<ChessManager>().SetXBoard(matrixX);
-            reference.GetComponent<ChessManager>().SetYBoard(matrixY);
-            reference.GetComponent<ChessManager>().SetCoord();*/
-
-            //controller.GetComponent<Game>().SetPosition(reference);
-
-            //controller.GetComponent<Game>().NextTurn();
-
-            //reference.GetComponent<ChessManager>().DestroyMovePlates();
+            controller.GetComponent<Game>().NextTurn();
 
             Game_Timer = Max_Time;
         }

@@ -151,6 +151,9 @@ public class Game : MonoBehaviour
         {
             currentPlayer = "white";
         }
+
+        GameObject GM = GameObject.Find("GameManager");
+        GM.GetComponent<Timer>().Game_Timer = GM.GetComponent<Timer>().Max_Time;
     }
 
     public void Winner(string playerWinner)
