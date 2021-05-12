@@ -28,7 +28,7 @@ public class FX_Touch : MonoBehaviour
             Vector2 MousePos = Input.mousePosition;//마우스 클릭 받기
             MousePos = GameObject.Find("Main Camera").GetComponent<Camera>().ScreenToWorldPoint(MousePos);//받은 클릭 카메라에 맞춰서 위치 조정
 
-            GameObject particles = (GameObject)Instantiate(spawnParticle); //특정 파티클의 클론 제작
+            GameObject particles = (GameObject)Instantiate(spawnParticle); //특정 이펙트의 클론 제작
             particles.transform.localScale *= FXsize;//크기조절
             particles.transform.position = new Vector3(MousePos.x, MousePos.y - 0.1f, -3);//제작한 클론의 위치
         }

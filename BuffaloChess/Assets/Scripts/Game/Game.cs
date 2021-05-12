@@ -160,8 +160,6 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().enabled = true;
         GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().text = playerWinner + " is the Winner";
         GameObject.FindGameObjectWithTag("RestartText").GetComponent<Text>().enabled = true;
-
-        
     }
 
     // Update is called once per frame
@@ -172,6 +170,34 @@ public class Game : MonoBehaviour
             gameOver = false;
 
             SceneManager.LoadScene("Game");
+        }
+
+        if (currentPlayer == "black")
+        {
+            Buffalo_Check();
+        }
+    }
+
+    void Buffalo_Check()
+    {
+        controller = GameObject.FindGameObjectWithTag("GameController");
+        Game sc = controller.GetComponent<Game>();
+        int Cnt = 0;
+
+        GameObject[] Mals = GameObject.FindGameObjectsWithTag("Buffalo");
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Buffalo").Length; i++)
+        {
+            if (sc.GetPosition(Mals[i].GetComponent<ChessManager>().GetXBoard()
+                    , Mals[i].GetComponent<ChessManager>().GetYBoard() - 1) != null)
+            {
+                Cnt += 1;
+            }
+        }
+
+        //현재 이동 가능한 버팔로의 수가 0이면 사냥꾼 승리
+        if ((GameObject.FindGameObjectsWithTag("Buffalo").Length - Cnt) == 0)
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>().Winner("Hunter");
         }
     }
 

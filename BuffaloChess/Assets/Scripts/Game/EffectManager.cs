@@ -22,6 +22,10 @@ public class EffectManager : MonoBehaviour
         {
             Event1.SetActive(false);
         }
-        
+    }
+
+    public void Effect_Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }
