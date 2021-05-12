@@ -134,6 +134,11 @@ public class Game : MonoBehaviour
         return currentPlayer;
     }
 
+    public int GetTurnCnt()
+    {
+        return TurnCnt;
+    }
+
     public bool IsGameOver()
     {
         return gameOver;

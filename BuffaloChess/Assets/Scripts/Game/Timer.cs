@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
     public float Game_Timer;
     public float Max_Time = 3f;
+    public Text TurnText;
+    public Text PlayerText;
 
     public GameObject controller;
     GameObject reference = null;
@@ -21,6 +24,12 @@ public class Timer : MonoBehaviour
     {
         Game_Timer -= Time.deltaTime;
 
+        Timer_Update();
+        Buffalo_Check();
+    }
+
+    void Buffalo_Check()
+    {
         if (Game_Timer < 0)
         {
             Debug.Log("Next Turn!");
@@ -37,5 +46,14 @@ public class Timer : MonoBehaviour
 
             Game_Timer = Max_Time;
         }
+    }
+
+    public void Timer_Update()
+    {
+        GameObject.Find("Time_Slider").GetComponent<Slider>().maxValue = Max_Time;
+        GameObject.Find("Time_Slider").GetComponent<Slider>().value = Game_Timer;
+
+        TurnText.text = "Turn : " + controller.GetComponent<Game>().GetTurnCnt().ToString();
+        PlayerText.text = controller.GetComponent<Game>().GetCurrentPlayer();
     }
 }
