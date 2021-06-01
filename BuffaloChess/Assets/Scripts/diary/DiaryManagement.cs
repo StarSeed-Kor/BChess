@@ -57,7 +57,7 @@ public class DiaryManagement : MonoBehaviour
 
     public GameObject[] DiarySlot;
     // Start is called before the first frame update
-    public Sprite ClickTab, UnClickTab;
+    public Sprite QuestClickTab, QuestUnClickTab, AcClickTab, AcUnClickTab;
 
     public Image[] TabImage;
 
@@ -143,9 +143,9 @@ public class DiaryManagement : MonoBehaviour
                 break;
 
         }
-
-        for (int i = 0; i < TabImage.Length; i++)
-            TabImage[i].sprite = i == tabNum ? ClickTab : UnClickTab;
+        TabImage[0].sprite = 0 == tabNum ? QuestClickTab : QuestUnClickTab;
+       
+        TabImage[1].sprite = 1 == tabNum ? AcClickTab : AcUnClickTab;
     }
 
     void SaveFile()
