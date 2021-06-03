@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
 {
     [HideInInspector]
     public float Game_Timer;
-    public float Max_Time = 5f;
+    public float Max_Time;
     public Text TurnText;
     public Text PlayerText;
 
@@ -17,11 +17,13 @@ public class Timer : MonoBehaviour
     public GameObject[] Enemy_Timer_Object = new GameObject[3];
     public GameObject[] Player_Timer_Object = new GameObject[3];
 
-    Animator anim;
+    //Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Max_Time은 Unity Hierarchy 내의 GameManager 건드리기
+        //Max_Time = 6f;
         Game_Timer = Max_Time;
     }
 
@@ -33,6 +35,8 @@ public class Timer : MonoBehaviour
         Timer_Update();
         Buffalo_Check();
         Alert_Time();
+
+        Debug.Log(Max_Time);
     }
 
     void Alert_Time()
@@ -41,30 +45,30 @@ public class Timer : MonoBehaviour
         {
             if (Game_Timer <= 3f)
             {
-                Player_Timer_Object[0].GetComponent<Animator>().Play("Timer_Up");
+                Player_Timer_Object[0].SetActive(true);
             }
             if (Game_Timer <= 2f)
             {
-                Player_Timer_Object[1].GetComponent<Animator>().Play("Timer_Up");
+                Player_Timer_Object[1].SetActive(true);
             }
             if (Game_Timer <= 1f)
             {
-                Player_Timer_Object[2].GetComponent<Animator>().Play("Timer_Up");
+                Player_Timer_Object[2].SetActive(true);
             }
         }
         else if(controller.GetComponent<Game>().GetCurrentPlayer() == "black")
         {
             if ( Game_Timer <= 3f)
             {
-                Enemy_Timer_Object[0].GetComponent<Animator>().Play("Timer_Up");
+                Enemy_Timer_Object[0].SetActive(true);
             }
             if (Game_Timer <= 2f)
             {
-                Enemy_Timer_Object[1].GetComponent<Animator>().Play("Timer_Up");
+                Enemy_Timer_Object[1].SetActive(true);
             }
             if (Game_Timer <= 1f)
             {
-                Enemy_Timer_Object[2].GetComponent<Animator>().Play("Timer_Up");
+                Enemy_Timer_Object[2].SetActive(true);
             }
         }
     }
@@ -87,8 +91,8 @@ public class Timer : MonoBehaviour
 
             for(int i = 0; i < 3; i++)
             {
-                Enemy_Timer_Object[i].GetComponent<Animator>().Play("Timer_Down");
-                Player_Timer_Object[i].GetComponent<Animator>().Play("Timer_Down");
+                Enemy_Timer_Object[i].SetActive(false);
+                Player_Timer_Object[i].SetActive(false);
             }
 
             Game_Timer = Max_Time;
