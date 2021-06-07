@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Shop
@@ -15,6 +16,13 @@ public class Shop
     public bool IsHaving;
 }
 
+enum ShopNum
+{
+    CuteDog,
+    AngryDog,
+    SmileDog
+};
+
 public class ShopManager : MonoBehaviour
 {
 
@@ -25,6 +33,8 @@ public class ShopManager : MonoBehaviour
     string filePath;
   
     public GameObject[] ItemSlot;
+
+    public GameObject[] HavingItemSlot;
    
     public Sprite[] ItemSprite;
 
@@ -49,7 +59,16 @@ public class ShopManager : MonoBehaviour
         filePath = Application.persistentDataPath + "/AllItem.txt";
         print(filePath);
         LoadFile();
-        ItemArrange();
+        if(SceneManager.GetActiveScene().name == "Shop")
+        {
+            ItemArrange();
+        }
+
+        if (SceneManager.GetActiveScene().name == "Collection")
+        {
+            Debug.Log("comein");
+            HavingItemArrange();
+        }
     }
 
     // Update is called once per frame
@@ -97,6 +116,25 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
+
+    public void HavingItemArrange()
+    {
+        MyItemList = AllItemList.FindAll(x => x.IsHaving);
+
+        for (int i = 0; i < HavingItemSlot.Length; i++)
+        {
+            Debug.Log(MyItemList.Count);
+            HavingItemSlot[i].SetActive(i < MyItemList.Count);
+            HavingItemSlot[i].transform.GetChild(1).GetComponent<Text>().text = i < MyItemList.Count ? MyItemList[i].ID : "";
+
+            if (i < MyItemList.Count)
+            {
+                //샵 에서는 몇번째인지 알아야함 추후 고치기
+                HavingItemSlot[i].transform.GetChild(0).GetComponent<Image>().sprite = ItemSprite[i];
+            }
+        }
+    }
+
     public void ClickItem(int slotNum)
     {
         curslotNum = slotNum;

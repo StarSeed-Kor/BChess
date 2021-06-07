@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Collection\BtnManager.cs" />
+    <Compile Include="Assets\Scripts\Collection\CollectionManager.cs" />
     <Compile Include="Assets\Scripts\Collection\ShopManager.cs" />
     <Compile Include="Assets\Scripts\FX_Touch.cs" />
     <Compile Include="Assets\Scripts\Game\ChessManager.cs" />
