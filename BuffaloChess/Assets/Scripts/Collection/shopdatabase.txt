@@ -1,0 +1,3 @@
+Skin	CuteDog	귀여운 사냥개 스킨	1000	FALSE
+Skin	AngryDog	화난 사냥개 스킨	1000	FALSE
+Skin	SmileDog	웃는 사냥개 스킨	1000	FALSE
