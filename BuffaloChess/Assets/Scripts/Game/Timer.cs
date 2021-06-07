@@ -8,16 +8,16 @@ public class Timer : MonoBehaviour
     [HideInInspector]
     public float Game_Timer;
     public float Max_Time;
+    public float Total_Time;
     public Text TurnText;
     public Text PlayerText;
+    public Text Total_TimeText;
 
     public GameObject controller;
     /*GameObject reference = null;*/
 
-    public GameObject[] Enemy_Timer_Object = new GameObject[3];
-    public GameObject[] Player_Timer_Object = new GameObject[3];
-
-    //Animator anim;
+    public GameObject Timer_Buffalo;
+    public GameObject Timer_Hunter;
 
     // Start is called before the first frame update
     void Start()
@@ -25,51 +25,20 @@ public class Timer : MonoBehaviour
         //Max_Time은 Unity Hierarchy 내의 GameManager 건드리기
         //Max_Time = 6f;
         Game_Timer = Max_Time;
-    }
+        Total_Time = 0;
+}
 
     // Update is called once per frame
     void Update()
     {
-        Game_Timer -= Time.deltaTime;
-
-        Timer_Update();
-        Buffalo_Check();
-        Alert_Time();
-
-        Debug.Log(Max_Time);
-    }
-
-    void Alert_Time()
-    {
-        if(controller.GetComponent<Game>().GetCurrentPlayer() == "white")
+        if (this.name == "GameManager")
         {
-            if (Game_Timer <= 3f)
-            {
-                Player_Timer_Object[0].SetActive(true);
-            }
-            if (Game_Timer <= 2f)
-            {
-                Player_Timer_Object[1].SetActive(true);
-            }
-            if (Game_Timer <= 1f)
-            {
-                Player_Timer_Object[2].SetActive(true);
-            }
-        }
-        else if(controller.GetComponent<Game>().GetCurrentPlayer() == "black")
-        {
-            if ( Game_Timer <= 3f)
-            {
-                Enemy_Timer_Object[0].SetActive(true);
-            }
-            if (Game_Timer <= 2f)
-            {
-                Enemy_Timer_Object[1].SetActive(true);
-            }
-            if (Game_Timer <= 1f)
-            {
-                Enemy_Timer_Object[2].SetActive(true);
-            }
+            Game_Timer -= Time.deltaTime;
+            Total_Time += Time.deltaTime;
+
+            Timer_Update();
+            Buffalo_Check();
+            Debug.Log(Max_Time);
         }
     }
 
@@ -89,22 +58,51 @@ public class Timer : MonoBehaviour
 
             controller.GetComponent<Game>().NextTurn();
 
-            for(int i = 0; i < 3; i++)
-            {
-                Enemy_Timer_Object[i].SetActive(false);
-                Player_Timer_Object[i].SetActive(false);
-            }
-
             Game_Timer = Max_Time;
         }
     }
 
     public void Timer_Update()
     {
-        GameObject.Find("Time_Slider").GetComponent<Slider>().maxValue = Max_Time;
-        GameObject.Find("Time_Slider").GetComponent<Slider>().value = Game_Timer;
+        if (controller.GetComponent<Game>().GetCurrentPlayer() == "black")
+        {
+            Timer_Buffalo.SetActive(true);
+            GameObject.Find("Rope_Buffalo").GetComponent<Image>().fillAmount = Game_Timer / Max_Time;
+            Timer_Hunter.SetActive(false);
+
+            if (Game_Timer < 1f)
+            {
+                GameObject.Find("TimeEdge_Buffalo").GetComponent<Animator>().SetTrigger("Event_On");
+            }
+        }
+        else if (controller.GetComponent<Game>().GetCurrentPlayer() == "white")
+        {
+            Timer_Hunter.SetActive(true);
+            GameObject.Find("Rope_Hunter").GetComponent<Image>().fillAmount = Game_Timer / Max_Time;
+            Timer_Buffalo.SetActive(false);
+
+            if (Game_Timer < 1f)
+            {
+                GameObject.Find("TimeEdge_Hunter").GetComponent<Animator>().SetTrigger("Event_On");
+            }
+        }
 
         TurnText.text = "Turn : " + controller.GetComponent<Game>().GetTurnCnt().ToString();
-        PlayerText.text = controller.GetComponent<Game>().GetCurrentPlayer();
+        //PlayerText.text = controller.GetComponent<Game>().GetCurrentPlayer();
+        Total_TimeText.text = "Total : " + Total_Time.ToString("N1");
+
+        if (controller.GetComponent<Game>().GetCurrentPlayer() == "black")
+        {
+            PlayerText.text = "Buffalo";
+        }
+        else if (controller.GetComponent<Game>().GetCurrentPlayer() == "white")
+        {
+            PlayerText.text = "Hunter";
+        }
+    }
+
+    public void Reset_Timer()
+    {
+        GetComponent<Animator>().SetTrigger("Event_Off");
     }
 }

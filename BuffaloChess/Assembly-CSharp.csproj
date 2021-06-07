@@ -68,8 +68,10 @@
     <Compile Include="Assets\Scripts\Game\ChessManager.cs" />
     <Compile Include="Assets\Scripts\Game\EffectManager.cs" />
     <Compile Include="Assets\Scripts\Game\Game.cs" />
+    <Compile Include="Assets\Scripts\Game\Gimic.cs" />
     <Compile Include="Assets\Scripts\Game\MovePlate.cs" />
     <Compile Include="Assets\Scripts\Game\Timer.cs" />
+    <Compile Include="Assets\Scripts\Game\Timer_Fire.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingScreen.cs" />
     <Compile Include="Assets\Scripts\Loading\TouchBlink.cs" />
     <Compile Include="Assets\Scripts\MouseOver.cs" />

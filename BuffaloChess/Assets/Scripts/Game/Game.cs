@@ -51,6 +51,7 @@ public class Game : MonoBehaviour
         {
             //버팔로체스
             Create("hunter", 5, 1), Create("dog", 3, 1), Create("dog", 4, 1), Create("dog", 6, 1), Create("dog", 7, 1)
+            //, Create("dog", 0, 0), Create("dog", 10, 0)
 
             //일반 체스
             /*Create("white_rook", 0, 0), Create("white_knight", 1, 0), Create("white_bishop", 2, 0),
@@ -222,7 +223,7 @@ public class Game : MonoBehaviour
             Jackal_Bool = true;
 
             Jackal_Zone.SetActive(true);
-            Jackal_Zone.transform.GetChild(1).position = new Vector3(0.15f, -2.72f + (1.1f * Jackal_Line), 0);
+            Jackal_Zone.transform.GetChild(1).position = new Vector3(0.15f, -2.24f + (1.165f * Jackal_Line), 0);
         }
 
         //자칼 이벤트가 발생할 턴이 되면

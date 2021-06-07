@@ -58,10 +58,11 @@ public class ChessManager : MonoBehaviour
         float x = BoardX;
         float y = BoardY;
 
-        x *= 1.1f;
-        y *= 1.1f;
+        x *= 1.165f;
+        y *= 1.165f;
 
-        x += -5.35f; y += -3.8f;
+        x += -5.68f; y += -3.4f;
+        //x += -5.35f; y += -3.8f;
         //x += -3.85f; y += -4.15f;
 
         this.transform.position = new Vector3(x, y, -1.0f);
@@ -337,10 +338,11 @@ public class ChessManager : MonoBehaviour
         float x = matrixX;
         float y = matrixY;
 
-        x *= 1.1f;
-        y *= 1.1f;
+        x *= 1.165f;
+        y *= 1.165f;
 
-        x += -5.35f; y += -3.8f;
+        x += -5.68f; y += -3.4f;
+        //x += -5.35f; y += -3.8f;
         //x += -3.85f; y += -4.15f;
 
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
@@ -355,10 +357,11 @@ public class ChessManager : MonoBehaviour
         float x = matrixX;
         float y = matrixY;
 
-        x *= 1.1f;
-        y *= 1.1f;
+        x *= 1.165f;
+        y *= 1.165f;
 
-        x += -5.35f; y += -3.8f;
+        x += -5.68f; y += -3.4f;
+        //x += -5.35f; y += -3.8f;
         //x += -3.85f; y += -4.15f;
 
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
