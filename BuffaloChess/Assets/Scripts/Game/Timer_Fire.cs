@@ -23,12 +23,12 @@ public class Timer_Fire : MonoBehaviour
         if (this.name == "TimerImage_Hunter")
         {
             pos = GetComponent<RectTransform>();
-            pos.anchoredPosition = new Vector2(-270 + 535 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Max_Time), -200);
+            pos.anchoredPosition = new Vector2(-270 + 535 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Alert_Time), -200);
         }
         else if(this.name == "TimerImage_Buffalo")
         {
             pos = GetComponent<RectTransform>();
-            pos.anchoredPosition = new Vector2(260 - 535 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Max_Time), 205);
+            pos.anchoredPosition = new Vector2(260 - 535 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Alert_Time), 205);
         }
 
     }

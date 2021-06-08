@@ -783,6 +783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Game_Timer: 0
   Max_Time: 0
+  Alert_Time: 0
   Total_Time: 0
   TurnText: {fileID: 0}
   PlayerText: {fileID: 0}
@@ -1162,7 +1163,7 @@ GameObject:
   - component: {fileID: 498653294}
   - component: {fileID: 498653295}
   m_Layer: 0
-  m_Name: Gimic_Dog
+  m_Name: Gimic_Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1207,7 +1208,7 @@ SpriteRenderer:
   m_SortingLayerID: 1695369345
   m_SortingLayer: -1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: ad14301690acdb748a13fe934495b188, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9eb8ee262c2a33942b2aae1092895cdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1225,13 +1226,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498653291}
-  m_LocalRotation: {x: -0, y: -0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 7.9, y: -0.8, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.1, y: -0.75, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 432005963}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &498653294
 Animator:
   serializedVersion: 3
@@ -3834,6 +3835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Game_Timer: 0
   Max_Time: 0
+  Alert_Time: 0
   Total_Time: 0
   TurnText: {fileID: 0}
   PlayerText: {fileID: 0}
@@ -4460,7 +4462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Game_Timer: 0
-  Max_Time: 6
+  Max_Time: 3
+  Alert_Time: 2
   Total_Time: 0
   TurnText: {fileID: 1726786584}
   PlayerText: {fileID: 1493040375}

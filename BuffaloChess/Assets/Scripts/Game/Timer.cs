@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
     [HideInInspector]
     public float Game_Timer;
     public float Max_Time;
+    public float Alert_Time;
     public float Total_Time;
     public Text TurnText;
     public Text PlayerText;
@@ -23,7 +24,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         //Max_Time은 Unity Hierarchy 내의 GameManager 건드리기
-        //Max_Time = 6f;
+        //Max_Time = 10f;
         Game_Timer = Max_Time;
         Total_Time = 0;
 }
@@ -64,10 +65,10 @@ public class Timer : MonoBehaviour
 
     public void Timer_Update()
     {
-        if (controller.GetComponent<Game>().GetCurrentPlayer() == "black")
+        if (controller.GetComponent<Game>().GetCurrentPlayer() == "black" && Game_Timer < Alert_Time)
         {
             Timer_Buffalo.SetActive(true);
-            GameObject.Find("Rope_Buffalo").GetComponent<Image>().fillAmount = Game_Timer / Max_Time;
+            GameObject.Find("Rope_Buffalo").GetComponent<Image>().fillAmount = Game_Timer / Alert_Time;
             Timer_Hunter.SetActive(false);
 
             if (Game_Timer < 1f)
@@ -75,16 +76,21 @@ public class Timer : MonoBehaviour
                 GameObject.Find("TimeEdge_Buffalo").GetComponent<Animator>().SetTrigger("Event_On");
             }
         }
-        else if (controller.GetComponent<Game>().GetCurrentPlayer() == "white")
+        else if (controller.GetComponent<Game>().GetCurrentPlayer() == "white" && Game_Timer < Alert_Time)
         {
             Timer_Hunter.SetActive(true);
-            GameObject.Find("Rope_Hunter").GetComponent<Image>().fillAmount = Game_Timer / Max_Time;
+            GameObject.Find("Rope_Hunter").GetComponent<Image>().fillAmount = Game_Timer / Alert_Time;
             Timer_Buffalo.SetActive(false);
 
             if (Game_Timer < 1f)
             {
                 GameObject.Find("TimeEdge_Hunter").GetComponent<Animator>().SetTrigger("Event_On");
             }
+        }
+        if (Game_Timer >= Alert_Time)
+        {
+            Timer_Hunter.SetActive(false);
+            Timer_Buffalo.SetActive(false);
         }
 
         TurnText.text = "Turn : " + controller.GetComponent<Game>().GetTurnCnt().ToString();

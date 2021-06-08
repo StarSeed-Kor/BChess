@@ -44,8 +44,7 @@ public class Gimic : MonoBehaviour
                 switch (RandNum)
                 {
                     case 0:
-                        GameObject.Find("Gimic_Dog").GetComponent<Animator>().SetTrigger("Gimic_Play");
-                        Debug.Log("Gimic Works");
+                        GameObject.Find("Gimic_Object").GetComponent<Animator>().SetTrigger("Gimic_Play");
                         break;
 
                     case 1:
