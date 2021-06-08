@@ -229,6 +229,9 @@ public class Game : MonoBehaviour
         //자칼 이벤트가 발생할 턴이 되면
         if (Jackal_Turn == TurnCnt)
         {
+            //자칼 지나가는 애니메이션 실행
+            GameObject.Find("Jackal_Anim").GetComponent<Animator>().Play("Jackal_Event");
+
             //표시됬던 라인에 이벤트 발생
             Debug.Log("Event Worked");
             Jackal_Zone.SetActive(false);
