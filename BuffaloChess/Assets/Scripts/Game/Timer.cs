@@ -39,7 +39,6 @@ public class Timer : MonoBehaviour
 
             Timer_Update();
             Buffalo_Check();
-            Debug.Log(Max_Time);
         }
     }
 
@@ -47,8 +46,6 @@ public class Timer : MonoBehaviour
     {
         if (Game_Timer < 0)
         {
-            Debug.Log("Next Turn!");
-
             controller = GameObject.FindGameObjectWithTag("GameController");
 
             GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
