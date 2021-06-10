@@ -32,6 +32,8 @@ public class ShopManager : MonoBehaviour
     public Sprite[] ItemSprite;
 
     public GameObject ItemExplainPanel;
+    
+    public GameObject CollectionExplainPanel;
 
     public GameObject PurchasePanel;
 
@@ -110,6 +112,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    //컬렉션
     public void HavingItemArrange()
     {
         MyItemList = AllItemList.FindAll(x => x.IsHaving);
@@ -120,14 +123,25 @@ public class ShopManager : MonoBehaviour
             HavingItemSlot[i].SetActive(i < MyItemList.Count);
             HavingItemSlot[i].transform.GetChild(1).GetComponent<Text>().text = i < MyItemList.Count ? MyItemList[i].ID : "";
 
-            if (i < MyItemList.Count)
-            {
-                //샵 에서는 몇번째인지 알아야함 추후 고치기
-                HavingItemSlot[i].transform.GetChild(0).GetComponent<Image>().sprite = ItemSprite[i];
-            }
+            //if (i < MyItemList.Count)
+            //{
+            //    //샵 에서는 몇번째인지 알아야함 추후 고치기
+            //    HavingItemSlot[i].transform.GetChild(0).GetComponent<Image>().sprite = ItemSprite[i];
+            //}
         }
     }
+    //컬렉션 버튼 클릭
+    public void ClickCollection(int slotNum)
+    {
+        MyItemList = AllItemList.FindAll(x => x.IsHaving);
 
+        curslotNum = slotNum;
+        CurItem = MyItemList[curslotNum];
+        CollectionExplainPanel.SetActive(true);
+        CollectionExplainPanel.transform.GetChild(1).GetComponent<Text>().text = CurItem.Contents;
+    }
+
+    //샵 버튼 클릭
     public void ClickItem(int slotNum)
     {
         curslotNum = slotNum;

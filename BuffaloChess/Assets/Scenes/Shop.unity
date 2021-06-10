@@ -249,6 +249,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6a701450f0e44464094592ff81f773cf, type: 3}
   - {fileID: 21300000, guid: d5c3ce6346011474bae7dbe1da68fdb6, type: 3}
   ItemExplainPanel: {fileID: 2146894581}
+  CollectionExplainPanel: {fileID: 0}
   PurchasePanel: {fileID: 836965998}
 --- !u!4 &33255228
 Transform:
@@ -668,7 +669,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 177008287}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 33255229}
+        m_MethodName: MusicOnOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &177008287
 MonoBehaviour:
   m_ObjectHideFlags: 0
