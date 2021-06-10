@@ -19,16 +19,17 @@ public class Timer_Fire : MonoBehaviour
     {
         this.gameObject.GetComponent<Image>().sprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
 
-        //출발위치 (265,-200), 도착위치 (-270 , -200)
         if (this.name == "TimerImage_Hunter")
         {
+            //출발위치 (680,354), 도착위치 (-590 , 354) 1300 이동
             pos = GetComponent<RectTransform>();
-            pos.anchoredPosition = new Vector2(-270 + 535 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Alert_Time), -200);
+            pos.anchoredPosition = new Vector2(-620 + 1300 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Alert_Time), -620);
         }
         else if(this.name == "TimerImage_Buffalo")
         {
+            //출발위치 (-646,-620), 도착위치 (656 , -620) 1300 이동
             pos = GetComponent<RectTransform>();
-            pos.anchoredPosition = new Vector2(260 - 535 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Alert_Time), 205);
+            pos.anchoredPosition = new Vector2(654 - 1300 * (GM.GetComponent<Timer>().Game_Timer / GM.GetComponent<Timer>().Alert_Time), 354);
         }
 
     }
