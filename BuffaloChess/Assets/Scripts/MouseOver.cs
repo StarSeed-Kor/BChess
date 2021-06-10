@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class MouseOver : MonoBehaviour
 {
-    public Sprite OffImage;
-    public Sprite OnImage;
-    public Image MImage;
+    public Sprite[] OffImage;
+    public Sprite[] OnImage;
+    public Image[] MImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +20,13 @@ public class MouseOver : MonoBehaviour
         
     }
 
-    public void PointUP()
+    public void PointUP(int num)
     {
-        MImage.sprite = OnImage;
+        MImage[num].sprite = OnImage[num];
     }
 
-    public void PointOut()
+    public void PointOut(int num)
     {
-        MImage.sprite = OffImage;
+        MImage[num].sprite = OffImage[num];
     }
 }
