@@ -1,6 +1,6 @@
-Quest	0	버팔로 20마리 잡기	50	FALSE
+Quest	0	버팔로 20마리 잡기	30	FALSE
 Quest	1	보안관 3승	50	FALSE
-Quest	2	버팔로 3승	50	FALSE
+Quest	2	버팔로 3승	30	FALSE
 Quest	3	버팔로 50마리 잡기	50	FALSE
 Quest	4	보안관 5승	50	FALSE
 Achievement	0	업적1		FALSE

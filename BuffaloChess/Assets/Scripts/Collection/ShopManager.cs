@@ -16,13 +16,6 @@ public class Shop
     public bool IsHaving;
 }
 
-enum ShopNum
-{
-    CuteDog,
-    AngryDog,
-    SmileDog
-};
-
 public class ShopManager : MonoBehaviour
 {
 
@@ -155,7 +148,9 @@ public class ShopManager : MonoBehaviour
         if (PurchasePanel.transform.GetChild(0).GetComponent<Text>().text == "상품을 구매하시겠습니까?")
         {
             if (CurItem.IsHaving)
+            {
                 PurchasePanel.transform.GetChild(0).GetComponent<Text>().text = "이미 가지고 있는 상품입니다";
+            }
             else
             {
                 CurItem.IsHaving = true;
